@@ -7,8 +7,9 @@ export function useGames(category) {
 
   useEffect(() => {
     // Define a URL (usando a sua lógica de categoria)
-    const url = category ? `/api/games?category=${category}` : `/api/games`;
-
+   const url = category 
+  ? `https://www.freetogame.com/api/games?category=${category}` 
+  : `https://www.freetogame.com/api/games`;
     // Reseta o loading e o erro antes de começar uma nova busca
     setLoading(true);
     setError(null);
