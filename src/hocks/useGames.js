@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
-//Aqui a gente colocou so a parte logica do hoock
+
 export function useGames(category) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Define a URL (usando a sua lógica de categoria)
-   const url = category 
-  ? `https://www.freetogame.com/api/games?category=${category}` 
-  : `https://www.freetogame.com/api/games`;
-    // Reseta o loading e o erro antes de começar uma nova busca
+   
+    // O Vercel vai usar o vercel.json para completar o caminho.
+    const url = category 
+      ? `/api/games?category=${category}` 
+      : `/api/games`;
+
     setLoading(true);
     setError(null);
 
     fetch(url)
       .then((res) => {
         if (!res.ok) {
+          // Se cair aqui, o Vercel respondeu, mas a API da FreeToGame deu erro
           throw new Error("Erro ao buscar os jogos");
         }
         return res.json();
@@ -26,11 +28,12 @@ export function useGames(category) {
         setLoading(false);
       })
       .catch((err) => {
+        // Se cair aqui, é erro de rede ou o proxy do vercel.json falhou
+        console.error("Erro no Fetch:", err);
         setError(err.message);
         setLoading(false);
       });
-  }, [category]); // O hook "escuta" a categoria: se ela mudar, ele busca de novo.
+  }, [category]);
 
-  // Retornamos um objeto com tudo o que o componente App.jsx vai precisar
   return { games, loading, error };
 }
