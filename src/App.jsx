@@ -1,5 +1,5 @@
 import { useState } from "react";
-import GameCard from "./components/CardGame"; // Lembre de ajustar para PascalCase se renomear o arquivo!
+import GameCard from "./components/cardGame"; // Lembre de ajustar para PascalCase se renomear o arquivo!
 import GameDetail from "./components/gameDetail";
 import { useGames } from "./hocks/useGames"; // Importando o seu hook customizado
 
