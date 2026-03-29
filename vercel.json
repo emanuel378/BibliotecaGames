@@ -3,6 +3,10 @@
     {
       "source": "/api/games",
       "destination": "https://www.freetogame.com/api/games"
+    },
+    {
+      "source": "/api/games/:path*",
+      "destination": "https://www.freetogame.com/api/games/:path*"
     }
   ]
 }
